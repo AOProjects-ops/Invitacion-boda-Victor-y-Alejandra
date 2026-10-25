@@ -195,16 +195,25 @@ a{color:inherit}
 .final .tag{font-family:var(--sans);font-size:11px;letter-spacing:.34em;color:var(--gold);margin-top:10px}
 
 /* ---------- Música ---------- */
-#music{position:fixed;right:max(16px,calc(50% - 280px + 14px));bottom:18px;z-index:150;width:54px;height:54px;border-radius:50%;border:0;cursor:pointer;
-  background:linear-gradient(135deg,var(--sage),var(--sage-d));color:#fff;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 24px -8px rgba(30,45,28,.7);opacity:0;pointer-events:none;transition:opacity .6s}
-#music.show{opacity:1;pointer-events:auto}
-#music .ico{width:24px;height:24px}
-#music::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid var(--gold-l);opacity:0}
-#music.playing::after{opacity:1;animation:ring 2.2s ease-out infinite}
-#music .off{display:none}
-#music.muted .on{display:none}#music.muted .off{display:block}
-@keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.4);opacity:0}}
+.player{position:fixed;left:50%;bottom:14px;z-index:150;width:min(92vw,372px);display:flex;align-items:center;gap:12px;
+  padding:8px 18px 10px 8px;border-radius:40px;background:rgba(255,253,249,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(184,151,90,.45);box-shadow:0 14px 34px -12px rgba(30,45,28,.55);
+  transform:translate(-50%,120%);opacity:0;pointer-events:none;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .8s}
+.player.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.player .pp{flex:none;width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--sage),var(--sage-d));box-shadow:0 6px 14px -6px rgba(30,45,28,.7)}
+.player .pp svg{width:20px;height:20px;fill:currentColor}
+.player .pp .pa{display:none}.player.playing .pp .pl{display:none}.player.playing .pp .pa{display:block}
+.pl-info{flex:1;min-width:0;line-height:1.2}
+.pl-info b{display:block;font-family:var(--head);font-weight:600;font-size:15px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-info span{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eq{flex:none;display:flex;align-items:flex-end;gap:3px;height:20px}
+.eq i{display:block;width:3px;height:5px;border-radius:2px;background:var(--gold)}
+.player.playing .eq i{animation:eq 1s ease-in-out infinite}
+.player.playing .eq i:nth-child(2){animation-delay:-.4s}.player.playing .eq i:nth-child(3){animation-delay:-.8s}.player.playing .eq i:nth-child(4){animation-delay:-.2s}
+@keyframes eq{0%,100%{height:5px}50%{height:20px}}
+.pl-bar{position:absolute;left:62px;right:20px;bottom:5px;height:3px;border-radius:3px;background:rgba(125,143,105,.22);cursor:pointer}
+.pl-bar span{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--sage),var(--gold))}
 
 @media (min-width:700px){body{font-size:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
@@ -465,9 +474,15 @@ a{color:inherit}
 
 </main>
 
-<button id="music" type="button" aria-label="Activar o pausar música">
-  <svg class="ico on"><use href="#i-note"/></svg><svg class="ico off"><use href="#i-mute"/></svg>
-</button>
+<div class="player" id="player" role="group" aria-label="Reproductor de música">
+  <button class="pp" id="pp" type="button" aria-label="Reproducir o pausar la música">
+    <svg class="pl" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.500 4.640A1 1 0 0 0 8 5.500z"/></svg>
+    <svg class="pa" viewBox="0 0 24 24"><rect x="6" y="5" width="4.200" height="14" rx="1.200"/><rect x="13.800" y="5" width="4.200" height="14" rx="1.200"/></svg>
+  </button>
+  <div class="pl-info"><b>Un Pacto Con Dios</b><span>Rabito Juan Fernández</span></div>
+  <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="pl-bar" id="pbarWrap" aria-hidden="true"><span id="pbar"></span></div>
+</div>
 <audio id="bgm" src="musica.mp3" loop preload="auto"></audio>
 
 <script>
@@ -524,20 +539,33 @@ $('#addCal').addEventListener('click',()=>{
 });
 
 /* Música */
-const bgm=$('#bgm'), mbtn=$('#music');
-let fade;
+const bgm=$('#bgm'), player=$('#player');
+let fade, resumeAfter=false;
 function fadeIn(){clearInterval(fade);bgm.volume=0;fade=setInterval(()=>{if(bgm.volume<CONFIG.volumen-.05)bgm.volume=Math.min(1,bgm.volume+.05);else{bgm.volume=CONFIG.volumen;clearInterval(fade)}},180)}
-bgm.addEventListener('play',()=>{mbtn.classList.add('playing');mbtn.classList.remove('muted')});
-bgm.addEventListener('pause',()=>{mbtn.classList.remove('playing');mbtn.classList.add('muted')});
-bgm.addEventListener('error',()=>{mbtn.style.display='none'});
-mbtn.addEventListener('click',()=>{ if(bgm.paused){bgm.play().catch(()=>{});} else bgm.pause(); });
+bgm.addEventListener('play',()=>player.classList.add('playing'));
+bgm.addEventListener('pause',()=>player.classList.remove('playing'));
+bgm.addEventListener('error',()=>{player.style.display='none'});
+bgm.addEventListener('timeupdate',()=>{if(bgm.duration)$('#pbar').style.width=(bgm.currentTime/bgm.duration*100)+'%'});
+$('#pp').addEventListener('click',()=>{ if(bgm.paused){bgm.play().then(fadeIn).catch(()=>{});} else bgm.pause(); });
+$('#pbarWrap').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();if(bgm.duration)bgm.currentTime=((e.clientX-r.left)/r.width)*bgm.duration});
+/* Pausa al salir de la pestaña y reanuda al volver */
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){resumeAfter=!bgm.paused;if(resumeAfter)bgm.pause();}
+  else if(resumeAfter){bgm.play().catch(()=>{});resumeAfter=false;}
+});
+/* Controles en la pantalla de bloqueo / notificaciones */
+if('mediaSession' in navigator){
+  navigator.mediaSession.metadata=new MediaMetadata({title:'Un Pacto Con Dios',artist:'Rabito Juan Fernández',album:'Boda Victor & Alejandra'});
+  navigator.mediaSession.setActionHandler('play',()=>bgm.play().catch(()=>{}));
+  navigator.mediaSession.setActionHandler('pause',()=>bgm.pause());
+}
 
 /* Abrir invitación */
 $('#open').addEventListener('click',()=>{
   bgm.play().then(fadeIn).catch(()=>{});
   $('#portal').classList.add('out');
   document.body.classList.remove('lock');
-  mbtn.classList.add('show'); mbtn.classList.add('muted');
+  player.classList.add('show');
   window.scrollTo(0,0);
   setTimeout(()=>$('#portal').remove(),1000);
 });
