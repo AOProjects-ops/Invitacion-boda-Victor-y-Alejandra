@@ -6,8 +6,9 @@ Para actualizar la invitación en uso, reemplaza SOLO este archivo en GitHub:
 
 (musica.mp3 y og-portada.jpg van igual que antes, se incluyen por si acaso.)
 
-Qué cambió: únicamente las imágenes, en el lugar exacto donde estaban los iconos.
-- Itinerario: los 6 muñequitos dentro de los círculos de la línea de tiempo.
-- Ceremonia cristiana: la pareja arriba de la tarjeta, donde estaba el icono de la iglesia.
-- Código de vestimenta: la imagen de la pareja formal arriba de "Formal".
-Todo lo demás (diseño, música, formulario, vista previa, textos) queda igual.
+Qué cambió en esta actualización: solo las imágenes de "Quienes nos acompañan",
+en el lugar donde estaban los iconos (arriba de cada tarjeta):
+- Padres del novio: el novio
+- Padres de la novia: la novia
+- Padrinos de boda: los anillos
+Todo lo demás queda igual (itinerario, ceremonia, vestimenta, música, formulario, vista previa).
