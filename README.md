@@ -1,16 +1,13 @@
 # Invitación de boda · Victor & Alejandra
 
-Sube estos 3 archivos a la raíz del repositorio de GitHub (reemplazando los anteriores):
+Para actualizar la invitación en uso, reemplaza SOLO este archivo en GitHub:
 
-- `index.html`
-- `musica.mp3`        (Un Pacto Con Dios - Rabito Juan Fernández)
-- `og-portada.jpg`    (la imagen que sale al compartir el enlace por WhatsApp)
+- index.html   <- único archivo que cambia
 
-Luego: Settings → Pages → Branch `main` → carpeta `/ (root)`.
+(musica.mp3 y og-portada.jpg van igual que antes, se incluyen por si acaso.)
 
-Enlace para compartir:
-https://aoprojects-ops.github.io/Invitacion-boda-Victor-y-Alejandra/
-
-Si ya compartiste el enlace antes, WhatsApp guarda la vista previa vieja.
-Comparte una versión nueva agregando algo al final, por ejemplo:
-https://aoprojects-ops.github.io/Invitacion-boda-Victor-y-Alejandra/?v=2
+Qué cambió: únicamente las imágenes, en el lugar exacto donde estaban los iconos.
+- Itinerario: los 6 muñequitos dentro de los círculos de la línea de tiempo.
+- Ceremonia cristiana: la pareja arriba de la tarjeta, donde estaba el icono de la iglesia.
+- Código de vestimenta: la imagen de la pareja formal arriba de "Formal".
+Todo lo demás (diseño, música, formulario, vista previa, textos) queda igual.
