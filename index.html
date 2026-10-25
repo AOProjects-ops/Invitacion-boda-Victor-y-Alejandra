@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación boda Victor y Alejandra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#7d8f69;
+    --verde-osc:#4f6b4a;
+    --dorado:#b8975a;
+    --texto:#222;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:#e9e9e9;
+    font-family:'Cormorant Garamond',serif;
+    color:var(--texto);
+    display:flex;justify-content:center;
+  }
+  .invitacion{
+    width:100%;max-width:480px;background:#fff;
+    text-align:center;overflow:hidden;
+    box-shadow:0 0 25px rgba(0,0,0,.12);
+  }
+  img{display:block;max-width:100%;margin:0 auto}
+  img.missing{background:#eee;border:1px dashed #bbb;min-height:120px;width:70%;font-size:12px;color:#888}
+  .script{font-family:'Great Vibes',cursive;font-weight:400}
+  h2{font-family:'Playfair Display',serif;font-size:21px;margin:26px 0 10px}
+  p{margin:6px 0}
+  section{padding:0 26px}
+
+  /* Portada */
+  .portada img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+  .nombres{font-size:44px;margin:6px 0 4px;line-height:1.1}
+
+  /* Reproductor */
+  .player{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:8px}
+  .player button{border:none;background:none;cursor:pointer;padding:0;color:#222}
+  .player .play{
+    width:64px;height:64px;border-radius:50%;background:#1b1f1b;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+  }
+  .player .mini{font-size:18px}
+  .barra{height:3px;background:#cfd6c8;margin:14px 30px 8px;position:relative;border-radius:2px}
+  .barra span{position:absolute;left:0;top:0;height:100%;width:0;background:var(--verde)}
+  .dale{font-size:26px;margin:4px 0 18px}
+
+  .versiculo{font-weight:700;font-size:17px;line-height:1.35}
+  .versiculo em{font-weight:400;font-size:17px}
+  .versiculo .cita{font-family:'Great Vibes',cursive;font-size:19px;display:block;text-align:right;margin-right:20px}
+
+  /* Fecha */
+  .fecha-t{font-size:40px;margin:24px 0 6px}
+  .dia{font-size:20px;margin:4px}
+  .fecha-n{font-size:44px;margin:4px 0 10px}
+  .faltan{font-size:18px;margin:10px 0}
+  .contador{display:flex;justify-content:center;gap:6px;align-items:flex-start;margin:6px 0 20px}
+  .contador div{min-width:50px}
+  .contador b{display:block;font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:#2f3a2c;line-height:1}
+  .contador small{font-size:8px;letter-spacing:1px;color:#777;text-transform:uppercase}
+  .contador i{font-style:normal;font-size:32px;line-height:1;color:#2f3a2c}
+  .contador .seg b{color:var(--verde)}
+
+  .manos img{width:100%;aspect-ratio:1/1.05;object-fit:cover}
+
+  /* Padres */
+  .padres img.ic{width:56px;height:auto;margin:6px auto 10px}
+  .padres .nom{font-size:25px;line-height:1.25;margin:2px 0}
+  .padres h2{margin-top:14px}
+
+  /* Divisor anillos */
+  .divisor{display:flex;align-items:center;justify-content:center;gap:10px;margin:22px 30px 0;color:var(--verde)}
+  .divisor::before,.divisor::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--verde))}
+  .divisor::after{background:linear-gradient(270deg,transparent,var(--verde))}
+  .divisor span{font-size:30px}
+
+  .texto{font-size:17px;line-height:1.35}
+  .pareja img{width:60%;margin:14px auto}
+
+  .lugar{display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 0 4px}
+  .lugar svg{width:38px;height:auto;fill:#d9bd91}
+  .lugar a{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:#222;text-decoration:none;text-transform:uppercase;max-width:150px;text-align:left}
+  .hora{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;display:flex;justify-content:center;align-items:center;gap:6px}
+
+  .recepcion h2{font-size:26px;margin-bottom:0}
+  .recepcion .nombres2{font-size:30px;margin:0}
+  .linea-corazon{display:flex;align-items:center;gap:8px;margin:2px 60px;font-size:12px}
+  .linea-corazon::before,.linea-corazon::after{content:"";flex:1;height:1px;background:#222}
+  .verde-it{color:var(--verde);font-style:italic;font-size:17px;margin:8px 20px}
+
+  /* Itinerario */
+  .iti{position:relative;margin:14px auto;max-width:330px;padding:6px 0}
+  .iti::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--verde);transform:translateX(-50%)}
+  .item{display:grid;grid-template-columns:1fr 24px 1fr;align-items:center;margin:22px 0;position:relative}
+  .item .ico{font-size:34px;text-align:center}
+  .item .punto{width:12px;height:12px;border-radius:50%;background:var(--verde);margin:auto;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}
+  .item .info{text-align:center;font-size:12px;line-height:1.2}
+  .item .info b{display:block;font-family:'Playfair Display',serif;font-size:13px;margin-bottom:2px}
+
+  /* Vestimenta */
+  .vest{display:flex;gap:10px;align-items:center;margin:8px 0}
+  .vest .img{width:32%}
+  .vest .txt{flex:1;font-size:12px;line-height:1.3}
+  .vest .txt .formal{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;display:block;margin-bottom:6px}
+  .vest small{font-size:9px;display:block;text-align:left}
+  .paleta{background:#f4f6ef;border-radius:6px;padding:12px 8px;margin:10px 0}
+  .paleta h4{margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:3px;font-size:12px;color:#8a8f7a}
+  .colores{display:flex;justify-content:space-around}
+  .colores div{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#777}
+  .colores span{display:block;width:44px;height:44px;border-radius:50%;margin:0 auto 4px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+
+  /* Regalos */
+  .sobre{width:190px;height:130px;margin:14px auto;background:#f3e4cf;border-radius:6px;position:relative;box-shadow:0 3px 8px rgba(0,0,0,.2);overflow:hidden}
+  .sobre::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 49%,#e6d0b0 50%) , linear-gradient(200deg,transparent 49%,#ecd9bc 50%)}
+  .sobre .sello{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#b52a2a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;z-index:2}
+
+  .script2{font-size:26px;margin:4px 0}
+  .confirm-btn{
+    display:inline-block;margin:12px 0 6px;padding:11px 26px;border:2px solid #e6c98f;border-radius:30px;
+    font-family:'Playfair Display',serif;font-weight:700;font-size:12px;color:#222;text-decoration:none;background:#fff;
+  }
+  .final{font-size:22px;line-height:1.5;margin:14px 10px 8px}
+  .pie{padding:0 0 30px}
+</style>
+</head>
+<body>
+<main class="invitacion">
+
+  <!-- PORTADA -->
+  <div class="portada">
+    <img src="images/portada.jpg" alt="Foto de portada" onerror="this.classList.add('missing')">
+  </div>
+  <div class="nombres script">Victor Y Alejandra</div>
+
+  <!-- REPRODUCTOR -->
+  <div class="player">
+    <button class="mini" aria-label="Anterior">⏮</button>
+    <button class="play" id="btnPlay" aria-label="Reproducir">▶</button>
+    <button class="mini" aria-label="Siguiente">⏭</button>
+  </div>
+  <div class="barra"><span id="progreso"></span></div>
+  <audio id="musica" src="musica.mp3" loop preload="none"></audio>
+  <div class="dale script">Dale click</div>
+
+  <section class="versiculo">
+    ¡Y así comienza nuestro para siempre!
+    <em>“Así que no son ya más dos, sino una sola carne; por tanto, los que Dios juntó, no lo separe el hombre.”</em>
+    <span class="cita">Mateo 19-6</span>
+  </section>
+
+  <!-- FECHA -->
+  <div class="fecha-t script">Fecha</div>
+  <p class="dia">Jueves</p>
+  <div class="fecha-n script">31 / 12 / 2026</div>
+  <p class="faltan">Faltan</p>
+  <div class="contador" id="contador">
+    <div><b id="d">00</b><small>Días</small></div><i>:</i>
+    <div><b id="h">00</b><small>Horas</small></div><i>:</i>
+    <div><b id="m">00</b><small>Minutos</small></div><i>:</i>
+    <div class="seg"><b id="s">00</b><small>Segundos</small></div>
+  </div>
+
+  <div class="manos">
+    <img src="images/manos.jpg" alt="Foto de las manos con anillo" onerror="this.classList.add('missing')">
+  </div>
+
+  <!-- PADRES -->
+  <section class="padres">
+    <h2>Padres del novio</h2>
+    <img class="ic" src="images/novio.png" alt="Novio" onerror="this.classList.add('missing')">
+    <p class="nom script">Hernesto Segundo Padilla Uribe</p>
+    <p class="nom script">Lucey Uribe</p>
+
+    <h2>Padres de la novia</h2>
+    <img class="ic" src="images/novia.png" alt="Novia" onerror="this.classList.add('missing')">
+    <p class="nom script">Héctor Fabio Escalante Gálvez</p>
+    <p class="nom script">Yesenia Luz Pelo Orozco</p>
+
+    <h2>Padrinos de boda</h2>
+    <img class="ic" style="width:80px" src="images/anillos.png" alt="Anillos" onerror="this.classList.add('missing')">
+    <p class="nom script">Julian Alfonso López Arias</p>
+    <p class="nom script">Kellis Jhoana Pelo Orozco</p>
+    <p class="nom script">Ciro Antonio Serrano Duran</p>
+    <p class="nom script">Olga Amelia Cabellero Sinitave</p>
+  </section>
+
+  <div class="divisor"><span>💍</span></div>
+
+  <!-- CEREMONIA -->
+  <section>
+    <h2>Ceremonia cristiana</h2>
+    <p class="texto">Ante Dios y junto a nuestros seres queridos, celebraremos nuestro amor y daremos el sí para toda la vida. Te invitamos a acompañarnos.</p>
+    <div class="pareja">
+      <img src="images/pareja.png" alt="Ilustración de la pareja" onerror="this.classList.add('missing')">
+    </div>
+    <div class="lugar">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.500z"/></svg>
+      <a href="https://www.google.com/maps/search/?api=1&query=Iglesia+Cristiana+Emanuel" target="_blank" rel="noopener">Iglesia Cristiana Emanuel</a>
+    </div>
+    <div class="hora">🕓 4:00 PM</div>
+  </section>
+
+  <!-- RECEPCIÓN -->
+  <section class="recepcion">
+    <h2>Recepción</h2>
+    <p class="nombres2 script">Victor Y Alejandra</p>
+    <div class="linea-corazon">♥</div>
+    <p class="verde-it">Lo más importante es compartir este día con ustedes.</p>
+    <p class="texto"><b>El lugar de nuestra celebración será anunciado próximamente</b></p>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section>
+    <h2>Itinerario</h2>
+    <div class="iti">
+      <div class="item"><div class="info"><span class="ico">⛪</span></div><div class="punto"></div><div class="info"><b>4:00 a 5:00 pm.</b>Inicia la ceremonia cristiana</div></div>
+      <div class="item"><div class="ico">📷</div><div class="punto"></div><div class="info"><b>5:00 a 6:00 pm.</b>Sesión de fotos de los novios</div></div>
+      <div class="item"><div class="ico">🥂</div><div class="punto"></div><div class="info"><b>6:00 a 6:30 pm.</b>Recepción y brindis familiar</div></div>
+      <div class="item"><div class="ico">💃</div><div class="punto"></div><div class="info"><b>7:00 a 7:30 pm.</b>Primer baile de los novios</div></div>
+      <div class="item"><div class="ico">🍽️</div><div class="punto"></div><div class="info"><b>8:00 a 9:00 pm.</b>Cena y banquete</div></div>
+      <div class="item"><div class="ico">🎶</div><div class="punto"></div><div class="info"><b>9:00 a 10:00 pm.</b>Presentación del grupo “los conquistadores de cristo”.</div></div>
+    </div>
+  </section>
+
+  <div class="divisor"><span>💍</span></div>
+
+  <!-- VESTIMENTA -->
+  <section>
+    <h2>Código de vestimenta</h2>
+    <div class="vest">
+      <div class="img">
+        <img src="images/vestimenta.png" alt="Vestimenta formal" onerror="this.classList.add('missing')">
+        <small>(Agradecemos evitar el uso de prendas en los colores que se encuentran en la imagen.)</small>
+      </div>
+      <div class="txt">
+        <span class="formal">Formal</span>
+        Para acompañar la armonía de nuestra celebración, te invitamos a elegir tonos claros y pasteles. Evitemos colores fuertes o intensos como el flamila, rojo, verde y similares.
+      </div>
+    </div>
+    <div class="paleta">
+      <h4>PALETA DE COLORES RESERVADA</h4>
+      <div class="colores">
+        <div><span style="background:#7d8f69"></span>Verde</div>
+        <div><span style="background:#fff;border:1px solid #ddd"></span>Blanco</div>
+        <div><span style="background:#111"></span>Negro</div>
+        <div><span style="background:linear-gradient(135deg,#d9bd7a,#a98038)"></span>Dorado</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGALOS -->
+  <section>
+    <h2>Mesa de regalos</h2>
+    <div class="sobre"><div class="sello">♥</div></div>
+    <p class="texto">Tu compañía hará de este día un recuerdo inolvidable. Si deseas tener un detalle con nosotros, agradeceremos tu lluvia de sobres.</p>
+
+    <h2>Consideraciones</h2>
+    <p class="script2 script">Solo adultos</p>
+    <p class="texto">Aunque amamos a sus pequeñitos está será una velada solo para adultos, gracias por su comprensión.</p>
+  </section>
+
+  <div class="divisor"><span>💍</span></div>
+
+  <!-- CONFIRMACIÓN -->
+  <section class="pie">
+    <h2>Confirmación</h2>
+    <p class="texto">Un sí para toda la vida… ¿nos acompañas?</p>
+    <p class="texto"><b><i>Por favor, confirma tu asistencia a más tardar el 25/11/2026</i></b></p>
+    <!-- CAMBIA 57XXXXXXXXXX por el número de WhatsApp (con código de país) -->
+    <a class="confirm-btn" target="_blank" rel="noopener"
+       href="https://wa.me/57XXXXXXXXXX?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Victor%20y%20Alejandra">Confirma tu asistencia</a>
+    <p class="final script">Gracias por ser parte de nuestra historia y por acompañarnos en el comienzo de nuestro para siempre.<br>¡Te esperamos!</p>
+  </section>
+
+</main>
+
+<script>
+  // Cuenta regresiva: 31/12/2026 4:00 PM (hora Colombia)
+  const objetivo = new Date('2026-12-31T16:00:00-05:00').getTime();
+  const pad = n => String(n).padStart(2,'0');
+  function tick(){
+    let diff = Math.max(0, objetivo - Date.now());
+    const d = Math.floor(diff/86400000); diff -= d*86400000;
+    const h = Math.floor(diff/3600000);  diff -= h*3600000;
+    const m = Math.floor(diff/60000);    diff -= m*60000;
+    const s = Math.floor(diff/1000);
+    document.getElementById('d').textContent = pad(d);
+    document.getElementById('h').textContent = pad(h);
+    document.getElementById('m').textContent = pad(m);
+    document.getElementById('s').textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Música
+  const audio = document.getElementById('musica');
+  const btn = document.getElementById('btnPlay');
+  const prog = document.getElementById('progreso');
+  btn.addEventListener('click', () => {
+    if (audio.paused) { audio.play().catch(()=>{}); btn.textContent = '❚❚'; }
+    else { audio.pause(); btn.textContent = '▶'; }
+  });
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) prog.style.width = (audio.currentTime/audio.duration*100) + '%';
+  });
+</script>
+</body>
+</html>
