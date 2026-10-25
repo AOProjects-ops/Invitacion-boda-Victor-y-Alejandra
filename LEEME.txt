@@ -1,0 +1,9 @@
+ARCHIVOS PARA SUBIR A GITHUB (todos en la raíz del repositorio):
+
+  index.html
+  musica.mp3        <-- TU canción (tú debes agregarla, con este nombre exacto)
+  images/
+     portada.jpg  manos.jpg  novio.png  novia.png  anillos.png  pareja.png
+     divisor.png  iti1.png ... iti6.png  vestimenta.jpg  paleta.png  sobre.png
+
+Luego: Settings -> Pages -> Branch: main, carpeta / (root).

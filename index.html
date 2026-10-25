@@ -35,7 +35,7 @@
   section{padding:0 26px}
 
   /* Portada */
-  .portada img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+  .portada img{width:100%;height:auto}
   .nombres{font-size:44px;margin:6px 0 4px;line-height:1.1}
 
   /* Reproductor */
@@ -66,10 +66,10 @@
   .contador i{font-style:normal;font-size:32px;line-height:1;color:#2f3a2c}
   .contador .seg b{color:var(--verde)}
 
-  .manos img{width:100%;aspect-ratio:1/1.05;object-fit:cover}
+  .manos img{width:100%;height:auto}
 
   /* Padres */
-  .padres img.ic{width:56px;height:auto;margin:6px auto 10px}
+  .padres img.ic{width:62px;height:auto;margin:6px auto 10px}
   .padres .nom{font-size:25px;line-height:1.25;margin:2px 0}
   .padres h2{margin-top:14px}
 
@@ -80,7 +80,11 @@
   .divisor span{font-size:30px}
 
   .texto{font-size:17px;line-height:1.35}
-  .pareja img{width:60%;margin:14px auto}
+  .pareja img{width:46%;margin:14px auto}
+  .div-img{width:88%;margin:22px auto 0}
+  .paleta-img{width:100%;margin:10px 0;border-radius:6px}
+  .sobre-img{width:210px;margin:14px auto}
+  .item .ico img{width:58px;height:auto}
 
   .lugar{display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 0 4px}
   .lugar svg{width:38px;height:auto;fill:#d9bd91}
@@ -126,9 +130,25 @@
   }
   .final{font-size:22px;line-height:1.5;margin:14px 10px 8px}
   .pie{padding:0 0 30px}
+
+  /* Pantalla de entrada (permite iniciar la música al abrir) */
+  #portal{position:fixed;inset:0;z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(rgba(255,255,255,.80),rgba(255,255,255,.88)),url('images/portada.jpg') center/cover no-repeat;
+    text-align:center;padding:24px;transition:opacity .6s ease}
+  #portal.oculto{opacity:0;pointer-events:none}
+  #portal .p-nombres{font-family:'Great Vibes',cursive;font-size:52px;line-height:1.1;margin:0 0 6px}
+  #portal .p-sub{font-size:20px;margin:0 0 26px;color:#444}
+  #portal button{border:2px solid #e6c98f;background:#fff;border-radius:34px;padding:13px 32px;
+    font-family:'Playfair Display',serif;font-weight:700;font-size:14px;cursor:pointer;color:#222;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  body.bloqueado{overflow:hidden}
 </style>
 </head>
-<body>
+<body class="bloqueado">
+<div id="portal">
+  <p class="p-nombres">Victor Y Alejandra</p>
+  <p class="p-sub">Te invitan a su boda</p>
+  <button id="btnAbrir">Abrir invitación ♥</button>
+</div>
 <main class="invitacion">
 
   <!-- PORTADA -->
@@ -144,7 +164,7 @@
     <button class="mini" aria-label="Siguiente">⏭</button>
   </div>
   <div class="barra"><span id="progreso"></span></div>
-  <audio id="musica" src="musica.mp3" loop preload="none"></audio>
+  <audio id="musica" src="musica.mp3" loop preload="auto"></audio>
   <div class="dale script">Dale click</div>
 
   <section class="versiculo">
@@ -182,14 +202,14 @@
     <p class="nom script">Yesenia Luz Pelo Orozco</p>
 
     <h2>Padrinos de boda</h2>
-    <img class="ic" style="width:80px" src="images/anillos.png" alt="Anillos" onerror="this.classList.add('missing')">
+    <img class="ic" style="width:150px" src="images/anillos.png" alt="Anillos" onerror="this.classList.add('missing')">
     <p class="nom script">Julian Alfonso López Arias</p>
     <p class="nom script">Kellis Jhoana Pelo Orozco</p>
     <p class="nom script">Ciro Antonio Serrano Duran</p>
     <p class="nom script">Olga Amelia Cabellero Sinitave</p>
   </section>
 
-  <div class="divisor"><span>💍</span></div>
+  <img class="div-img" src="images/divisor.png" alt="" onerror="this.style.display='none'">
 
   <!-- CEREMONIA -->
   <section>
@@ -218,23 +238,23 @@
   <section>
     <h2>Itinerario</h2>
     <div class="iti">
-      <div class="item"><div class="info"><span class="ico">⛪</span></div><div class="punto"></div><div class="info"><b>4:00 a 5:00 pm.</b>Inicia la ceremonia cristiana</div></div>
-      <div class="item"><div class="ico">📷</div><div class="punto"></div><div class="info"><b>5:00 a 6:00 pm.</b>Sesión de fotos de los novios</div></div>
-      <div class="item"><div class="ico">🥂</div><div class="punto"></div><div class="info"><b>6:00 a 6:30 pm.</b>Recepción y brindis familiar</div></div>
-      <div class="item"><div class="ico">💃</div><div class="punto"></div><div class="info"><b>7:00 a 7:30 pm.</b>Primer baile de los novios</div></div>
-      <div class="item"><div class="ico">🍽️</div><div class="punto"></div><div class="info"><b>8:00 a 9:00 pm.</b>Cena y banquete</div></div>
-      <div class="item"><div class="ico">🎶</div><div class="punto"></div><div class="info"><b>9:00 a 10:00 pm.</b>Presentación del grupo “los conquistadores de cristo”.</div></div>
+      <div class="item"><div class="ico"><img src="images/iti1.png" alt="" onerror="this.style.display='none'"></div><div class="punto"></div><div class="info"><b>4:00 a 5:00 pm.</b>Inicia la ceremonia cristiana</div></div>
+      <div class="item"><div class="ico"><img src="images/iti2.png" alt="" onerror="this.style.display='none'"></div><div class="punto"></div><div class="info"><b>5:00 a 6:00 pm.</b>Sesión de fotos de los novios</div></div>
+      <div class="item"><div class="ico"><img src="images/iti3.png" alt="" onerror="this.style.display='none'"></div><div class="punto"></div><div class="info"><b>6:00 a 6:30 pm.</b>Recepción y brindis familiar</div></div>
+      <div class="item"><div class="ico"><img src="images/iti4.png" alt="" onerror="this.style.display='none'"></div><div class="punto"></div><div class="info"><b>7:00 a 7:30 pm.</b>Primer baile de los novios</div></div>
+      <div class="item"><div class="ico"><img src="images/iti5.png" alt="" onerror="this.style.display='none'"></div><div class="punto"></div><div class="info"><b>8:00 a 9:00 pm.</b>Cena y banquete</div></div>
+      <div class="item"><div class="ico"><img src="images/iti6.png" alt="" onerror="this.style.display='none'"></div><div class="punto"></div><div class="info"><b>9:00 a 10:00 pm.</b>Presentación del grupo “los conquistadores de cristo”.</div></div>
     </div>
   </section>
 
-  <div class="divisor"><span>💍</span></div>
+  <img class="div-img" src="images/divisor.png" alt="" onerror="this.style.display='none'">
 
   <!-- VESTIMENTA -->
   <section>
     <h2>Código de vestimenta</h2>
     <div class="vest">
       <div class="img">
-        <img src="images/vestimenta.png" alt="Vestimenta formal" onerror="this.classList.add('missing')">
+        <img src="images/vestimenta.jpg" alt="Vestimenta formal" onerror="this.classList.add('missing')">
         <small>(Agradecemos evitar el uso de prendas en los colores que se encuentran en la imagen.)</small>
       </div>
       <div class="txt">
@@ -242,21 +262,13 @@
         Para acompañar la armonía de nuestra celebración, te invitamos a elegir tonos claros y pasteles. Evitemos colores fuertes o intensos como el flamila, rojo, verde y similares.
       </div>
     </div>
-    <div class="paleta">
-      <h4>PALETA DE COLORES RESERVADA</h4>
-      <div class="colores">
-        <div><span style="background:#7d8f69"></span>Verde</div>
-        <div><span style="background:#fff;border:1px solid #ddd"></span>Blanco</div>
-        <div><span style="background:#111"></span>Negro</div>
-        <div><span style="background:linear-gradient(135deg,#d9bd7a,#a98038)"></span>Dorado</div>
-      </div>
-    </div>
+    <img class="paleta-img" src="images/paleta.png" alt="Paleta de colores reservada" onerror="this.classList.add('missing')">
   </section>
 
   <!-- REGALOS -->
   <section>
     <h2>Mesa de regalos</h2>
-    <div class="sobre"><div class="sello">♥</div></div>
+    <img class="sobre-img" src="images/sobre.png" alt="Sobre de regalos" onerror="this.classList.add('missing')">
     <p class="texto">Tu compañía hará de este día un recuerdo inolvidable. Si deseas tener un detalle con nosotros, agradeceremos tu lluvia de sobres.</p>
 
     <h2>Consideraciones</h2>
@@ -264,7 +276,7 @@
     <p class="texto">Aunque amamos a sus pequeñitos está será una velada solo para adultos, gracias por su comprensión.</p>
   </section>
 
-  <div class="divisor"><span>💍</span></div>
+  <img class="div-img" src="images/divisor.png" alt="" onerror="this.style.display='none'">
 
   <!-- CONFIRMACIÓN -->
   <section class="pie">
@@ -300,12 +312,23 @@
   const audio = document.getElementById('musica');
   const btn = document.getElementById('btnPlay');
   const prog = document.getElementById('progreso');
-  btn.addEventListener('click', () => {
-    if (audio.paused) { audio.play().catch(()=>{}); btn.textContent = '❚❚'; }
-    else { audio.pause(); btn.textContent = '▶'; }
-  });
+  const portal = document.getElementById('portal');
+
+  audio.addEventListener('play',  () => btn.textContent = '❚❚');
+  audio.addEventListener('pause', () => btn.textContent = '▶');
   audio.addEventListener('timeupdate', () => {
     if (audio.duration) prog.style.width = (audio.currentTime/audio.duration*100) + '%';
+  });
+  btn.addEventListener('click', () => {
+    if (audio.paused) audio.play().catch(()=>{}); else audio.pause();
+  });
+
+  // Al tocar "Abrir invitación" se abre la página y empieza la música
+  document.getElementById('btnAbrir').addEventListener('click', () => {
+    audio.play().catch(()=>{});
+    portal.classList.add('oculto');
+    document.body.classList.remove('bloqueado');
+    setTimeout(() => portal.remove(), 700);
   });
 </script>
 </body>
