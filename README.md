@@ -6,5 +6,6 @@ Para actualizar la invitación en uso, reemplaza SOLO este archivo en GitHub:
 
 (musica.mp3 y og-portada.jpg van igual que antes, se incluyen por si acaso.)
 
-Qué cambió: únicamente la foto de portada (inicio de la invitación y fondo
-de la pantalla de bienvenida). Todo lo demás queda exactamente igual.
+Cambios de esta actualización (solo dos):
+1. Foto de portada nueva (inicio y fondo de la pantalla de bienvenida).
+2. Código de vestimenta: "flamila" cambiado por "fucsia".
